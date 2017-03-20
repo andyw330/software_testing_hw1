@@ -84,3 +84,33 @@ TEST(TriangleTest, EquivalenceSR) {
   EXPECT_STREQ("Value of b,c is not in the range of permitted values", triangle(195, 205, 205));
   EXPECT_STREQ("Value of a,b,c is not in the range of permitted values", triangle(205, 205, 205));
 }
+
+// Edge Testing
+// Normal
+TEST(TriangleTest, EdgeNormal) {
+  EXPECT_STREQ("Equilateral", triangle(1, 1, 1));
+  EXPECT_STREQ("Equilateral", triangle(200, 200, 200));
+  EXPECT_STREQ("Isosceles", triangle(1, 2, 2));
+  EXPECT_STREQ("Isosceles", triangle(200, 200, 199));
+  EXPECT_STREQ("Scalene", triangle(2, 3, 4));
+  EXPECT_STREQ("Scalene", triangle(200, 199, 198));
+  EXPECT_STREQ("NotATriangle", triangle(1, 1, 2));
+  EXPECT_STREQ("NotATriangle", triangle(200, 199, 1));
+}
+// Robust
+TEST(TriangleTest, EdgeRobust) {
+  EXPECT_STREQ("Value of a is not in the range of permitted values", triangle(-1, 1, 1));
+  EXPECT_STREQ("Value of b is not in the range of permitted values", triangle(1, -1, 1));
+  EXPECT_STREQ("Value of c is not in the range of permitted values", triangle(1, 1, -1));
+  EXPECT_STREQ("Value of a,b is not in the range of permitted values", triangle(-1, -1, 1));
+  EXPECT_STREQ("Value of a,c is not in the range of permitted values", triangle(-1, 1, -1));
+  EXPECT_STREQ("Value of b,c is not in the range of permitted values", triangle(1, -1, -1));
+  EXPECT_STREQ("Value of a,b,c is not in the range of permitted values", triangle(-1, -1, -1));
+  EXPECT_STREQ("Value of a is not in the range of permitted values", triangle(201, 200, 200));
+  EXPECT_STREQ("Value of b is not in the range of permitted values", triangle(200, 201, 200));
+  EXPECT_STREQ("Value of c is not in the range of permitted values", triangle(200, 200, 201));
+  EXPECT_STREQ("Value of a,b is not in the range of permitted values", triangle(201, 201, 200));
+  EXPECT_STREQ("Value of a,c is not in the range of permitted values", triangle(201, 200, 201));
+  EXPECT_STREQ("Value of b,c is not in the range of permitted values", triangle(200, 201, 201));
+  EXPECT_STREQ("Value of a,b,c is not in the range of permitted values", triangle(201, 201, 201));
+}
