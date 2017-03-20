@@ -49,3 +49,39 @@ TEST(TriangleTest, RobustBoundary) {
   EXPECT_STREQ("NotATriangle", triangle(200, 100, 100));
   EXPECT_STREQ("NotATriangle", triangle(201, 100, 100));
 }
+
+// Equivalence Class Testing
+// Weak Normal (, Strong Normal)
+TEST(TriangleTest, EquivalenceWN) {
+  EXPECT_STREQ("Equilateral", triangle(5, 5, 5));
+  EXPECT_STREQ("Isosceles", triangle(2, 2, 3));
+  EXPECT_STREQ("Scalene", triangle(3, 4, 5));
+  EXPECT_STREQ("NotATriangle", triangle(4, 1, 2));
+}
+// Weak Robust
+TEST(TriangleTest, EquivalenceWR) {
+  EXPECT_STREQ("NotATriangle", triangle(-1, 5, 5));
+  EXPECT_STREQ("NotATriangle", triangle(5, -1, 5));
+  EXPECT_STREQ("NotATriangle", triangle(5, 5, -1));
+  EXPECT_STREQ("NotATriangle", triangle(201, 5, 5));
+  EXPECT_STREQ("NotATriangle", triangle(5, 201, 5));
+  EXPECT_STREQ("NotATriangle", triangle(5, 5, 201));
+}
+// Strong Robust
+TEST(TriangleTest, EquivalenceSR) {
+  EXPECT_STREQ("NotATriangle", triangle(-1, 5, 5));
+  EXPECT_STREQ("NotATriangle", triangle(5, -1, 5));
+  EXPECT_STREQ("NotATriangle", triangle(5, 5, -1));
+  EXPECT_STREQ("NotATriangle", triangle(-1, -1, 5));
+  EXPECT_STREQ("NotATriangle", triangle(-1, 5, -1));
+  EXPECT_STREQ("NotATriangle", triangle(5, -1, -1));
+  EXPECT_STREQ("NotATriangle", triangle(-1, -1, -1));
+  EXPECT_STREQ("NotATriangle", triangle(205, 195, 195));
+  EXPECT_STREQ("NotATriangle", triangle(195, 205, 195));
+  EXPECT_STREQ("NotATriangle", triangle(195, 195, 205));
+  EXPECT_STREQ("NotATriangle", triangle(205, 205, 195));
+  EXPECT_STREQ("NotATriangle", triangle(205, 195, 205));
+  EXPECT_STREQ("NotATriangle", triangle(195, 205, 205));
+  EXPECT_STREQ("NotATriangle", triangle(205, 205, 205));
+}
+
