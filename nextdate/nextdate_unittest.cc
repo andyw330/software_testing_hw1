@@ -224,3 +224,44 @@ TEST(NextdateTest, EquivalenceSR) {
   EXPECT_STREQ("month and day and year not in range", nextdate(-1, -1, 1811));
   // ignore upper case for now
 }
+
+// Edge Testing
+// Normal
+TEST(NextdateTest, EdgeN) {
+  EXPECT_STREQ("1/15/1912", nextdate(1, 14, 1912));
+  EXPECT_STREQ("2/15/1912", nextdate(2, 14, 1912));
+  EXPECT_STREQ("11/15/1912", nextdate(11, 14, 1912));
+  EXPECT_STREQ("12/15/1912", nextdate(12, 14, 1912));
+  EXPECT_STREQ("6/2/1912", nextdate(6, 1, 1912));
+  EXPECT_STREQ("6/3/1912", nextdate(6, 2, 1912));
+  EXPECT_STREQ("6/30/1912", nextdate(6, 29, 1912));
+  EXPECT_STREQ("7/1/1912", nextdate(6, 30, 1912));
+  EXPECT_STREQ("6/15/1812", nextdate(6, 14, 1812));
+  EXPECT_STREQ("6/15/1813", nextdate(6, 14, 1813));
+  EXPECT_STREQ("6/15/2011", nextdate(6, 14, 2011));
+  EXPECT_STREQ("6/15/2012", nextdate(6, 14, 2012));
+}
+// Robust
+TEST(NextdateTest, EdgeR) {
+  EXPECT_STREQ("month not in range", nextdate(0, 14, 1912));
+  EXPECT_STREQ("1/15/1912", nextdate(1, 14, 1912));
+  EXPECT_STREQ("2/15/1912", nextdate(2, 14, 1912));
+  EXPECT_STREQ("11/15/1912", nextdate(11, 14, 1912));
+  EXPECT_STREQ("12/15/1912", nextdate(12, 14, 1912));
+  EXPECT_STREQ("month not in range", nextdate(13, 14, 1912));
+
+  EXPECT_STREQ("day not in range", nextdate(6, 0, 1912));
+  EXPECT_STREQ("6/2/1912", nextdate(6, 1, 1912));
+  EXPECT_STREQ("6/3/1912", nextdate(6, 2, 1912));
+  EXPECT_STREQ("6/30/1912", nextdate(6, 29, 1912));
+  EXPECT_STREQ("7/1/1912", nextdate(6, 30, 1912));
+  EXPECT_STREQ("Invalid input date", nextdate(6, 31, 1912));
+  EXPECT_STREQ("day not in range", nextdate(6, 32, 1912));
+
+  EXPECT_STREQ("year not in range", nextdate(6, 14, 1811));
+  EXPECT_STREQ("6/15/1812", nextdate(6, 14, 1812));
+  EXPECT_STREQ("6/15/1813", nextdate(6, 14, 1813));
+  EXPECT_STREQ("6/15/2011", nextdate(6, 14, 2011));
+  EXPECT_STREQ("6/15/2012", nextdate(6, 14, 2012));
+  EXPECT_STREQ("year not in range", nextdate(6, 14, 2013));
+}
