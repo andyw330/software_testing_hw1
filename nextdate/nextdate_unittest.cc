@@ -265,3 +265,20 @@ TEST(NextdateTest, EdgeR) {
   EXPECT_STREQ("6/15/2012", nextdate(6, 14, 2012));
   EXPECT_STREQ("year not in range", nextdate(6, 14, 2013));
 }
+
+// Decision Table Testing
+TEST(NextdateTest, DecisionTable) {
+  EXPECT_STREQ("4/16/2001", nextdate(4, 15, 2001));
+  EXPECT_STREQ("5/1/2001", nextdate(4, 30, 2001));
+  EXPECT_STREQ("Invalid input date", nextdate(4, 31, 2001));
+  EXPECT_STREQ("1/16/2001", nextdate(1, 15, 2001));
+  EXPECT_STREQ("2/1/2001", nextdate(1, 31, 2001));
+  EXPECT_STREQ("12/16/2001", nextdate(12, 15, 2001));
+  EXPECT_STREQ("1/1/2002", nextdate(12, 31, 2001));
+  EXPECT_STREQ("2/16/2001", nextdate(2, 15, 2001));
+  EXPECT_STREQ("2/29/2004", nextdate(2, 28, 2004));
+  EXPECT_STREQ("3/1/2001", nextdate(2, 28, 2001));
+  EXPECT_STREQ("3/1/2004", nextdate(2, 29, 2004));
+  EXPECT_STREQ("Invalid input date", nextdate(2, 29, 2001));
+  EXPECT_STREQ("Invalid input date", nextdate(2, 30, 2001));
+}
