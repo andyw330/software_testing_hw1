@@ -84,38 +84,3 @@ TEST(TriangleTest, EquivalenceSR) {
   EXPECT_STREQ("Value of b,c is not in the range of permitted values", triangle(195, 205, 205));
   EXPECT_STREQ("Value of a,b,c is not in the range of permitted values", triangle(205, 205, 205));
 }
-
-// Edge Testing
-// Weak Normal (, Strong Normal)
-TEST(TriangleTest, EquivalenceWN) {
-  EXPECT_STREQ("Equilateral", triangle(5, 5, 5));
-  EXPECT_STREQ("Isosceles", triangle(2, 2, 3));
-  EXPECT_STREQ("Scalene", triangle(3, 4, 5));
-  EXPECT_STREQ("NotATriangle", triangle(4, 1, 2));
-}
-// Weak Robust
-TEST(TriangleTest, EquivalenceWR) {
-  EXPECT_STREQ("Value of a is not in the range of permitted values", triangle(-1, 5, 5));
-  EXPECT_STREQ("Value of b is not in the range of permitted values", triangle(5, -1, 5));
-  EXPECT_STREQ("Value of c is not in the range of permitted values", triangle(5, 5, -1));
-  EXPECT_STREQ("Value of a is not in the range of permitted values", triangle(201, 5, 5));
-  EXPECT_STREQ("Value of b is not in the range of permitted values", triangle(5, 201, 5));
-  EXPECT_STREQ("Value of c is not in the range of permitted values", triangle(5, 5, 201));
-}
-// Strong Robust
-TEST(TriangleTest, EquivalenceSR) {
-  EXPECT_STREQ("Value of a is not in the range of permitted values", triangle(-1, 5, 5));
-  EXPECT_STREQ("Value of b is not in the range of permitted values", triangle(5, -1, 5));
-  EXPECT_STREQ("Value of c is not in the range of permitted values", triangle(5, 5, -1));
-  EXPECT_STREQ("Value of a,b is not in the range of permitted values", triangle(-1, -1, 5));
-  EXPECT_STREQ("Value of a,c is not in the range of permitted values", triangle(-1, 5, -1));
-  EXPECT_STREQ("Value of b,c is not in the range of permitted values", triangle(5, -1, -1));
-  EXPECT_STREQ("Value of a,b,c is not in the range of permitted values", triangle(-1, -1, -1));
-  EXPECT_STREQ("Value of a is not in the range of permitted values", triangle(205, 195, 195));
-  EXPECT_STREQ("Value of b is not in the range of permitted values", triangle(195, 205, 195));
-  EXPECT_STREQ("Value of c is not in the range of permitted values", triangle(195, 195, 205));
-  EXPECT_STREQ("Value of a,b is not in the range of permitted values", triangle(205, 205, 195));
-  EXPECT_STREQ("Value of a,c is not in the range of permitted values", triangle(205, 195, 205));
-  EXPECT_STREQ("Value of b,c is not in the range of permitted values", triangle(195, 205, 205));
-  EXPECT_STREQ("Value of a,b,c is not in the range of permitted values", triangle(205, 205, 205));
-}
