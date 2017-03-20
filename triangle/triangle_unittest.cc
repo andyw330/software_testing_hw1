@@ -1,7 +1,6 @@
 #include "triangle.h"
 #include "gtest/gtest.h"
 
-
 // Tests triangle(). (upper bound 200)
 
 // Boundary Value Testing
@@ -113,4 +112,16 @@ TEST(TriangleTest, EdgeRobust) {
   EXPECT_STREQ("Value of a,c is not in the range of permitted values", triangle(201, 200, 201));
   EXPECT_STREQ("Value of b,c is not in the range of permitted values", triangle(200, 201, 201));
   EXPECT_STREQ("Value of a,b,c is not in the range of permitted values", triangle(201, 201, 201));
+}
+
+// Decision Table Testing
+TEST(TriangleTest, DecisionTable) {
+  EXPECT_STREQ("NotATriangle", triangle(4, 1, 2));
+  EXPECT_STREQ("NotATriangle", triangle(1, 4, 2));
+  EXPECT_STREQ("NotATriangle", triangle(1, 2, 4));
+  EXPECT_STREQ("Equilateral", triangle(5, 5, 5));
+  EXPECT_STREQ("Isosceles", triangle(2, 2, 3));
+  EXPECT_STREQ("Isosceles", triangle(2, 3, 2));
+  EXPECT_STREQ("Isosceles", triangle(3, 2, 2));
+  EXPECT_STREQ("Scalene", triangle(3, 4, 5));
 }
