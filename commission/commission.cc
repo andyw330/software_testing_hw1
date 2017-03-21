@@ -14,25 +14,25 @@ double commission(int locks, int stocks, int barrels) {
   int barrels_out_range = (barrels < 1 || barrels > 90);
 
   if (locks_out_range && !stocks_out_range && !barrels_out_range) {
-    fprintf(stderr, "locks not in range");
+    fprintf(stderr, "Value of locks not in the range");
     exit(1);
   } else if (!locks_out_range && stocks_out_range && !barrels_out_range) {
-    fprintf(stderr, "stocks not in range");
+    fprintf(stderr, "Value of stocks not in the range");
     exit(1);
   } else if (!locks_out_range && !stocks_out_range && barrels_out_range) {
-    fprintf(stderr, "barrels not in range");
+    fprintf(stderr, "Value of barrels not in the range");
     exit(1);
   } else if (locks_out_range && stocks_out_range && !barrels_out_range) {
-    fprintf(stderr, "locks and stocks not in range");
+    fprintf(stderr, "Value of locks and stocks not in the range");
     exit(1);
   } else if (locks_out_range && !stocks_out_range && barrels_out_range) {
-    fprintf(stderr, "locks and barrels not in range");
+    fprintf(stderr, "Value of locks and barrels not in the range");
     exit(1);
   } else if (!locks_out_range && stocks_out_range && barrels_out_range) {
-    fprintf(stderr, "stocks and barrels not in range");
+    fprintf(stderr, "Value of stocks and barrels not in the range");
     exit(1);
   } else if (locks_out_range && stocks_out_range && barrels_out_range) {
-    fprintf(stderr, "locks and stocks and barrels not in range");
+    fprintf(stderr, "Value of locks and stocks and barrels not in the range");
     exit(1);
   }
 

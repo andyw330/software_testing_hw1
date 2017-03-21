@@ -49,7 +49,7 @@ TEST(CommissionTest, EquivalenceWR) {
   EXPECT_EXIT(commission(-2, 40, 45), ::testing::ExitedWithCode(1), "Value of locks not in the range");
   EXPECT_EXIT(commission(71, 40, 45), ::testing::ExitedWithCode(1), "Value of locks not in the range");
   EXPECT_EXIT(commission(35, -1, 45), ::testing::ExitedWithCode(1), "Value of stocks not in the range");
-  EXPECT_EXIT(commission(35, 81, -5), ::testing::ExitedWithCode(1), "Value of stocks not in the range");
+  EXPECT_EXIT(commission(35, 81, 45), ::testing::ExitedWithCode(1), "Value of stocks not in the range");
   EXPECT_EXIT(commission(35, 40, -1), ::testing::ExitedWithCode(1), "Value of barrels not in the range");
   EXPECT_EXIT(commission(35, 40, 91), ::testing::ExitedWithCode(1), "Value of barrels not in the range");
 }
@@ -81,7 +81,6 @@ TEST(CommissionTest, EdgeR) {
   EXPECT_DOUBLE_EQ(874, commission(35, 79, 45));
   EXPECT_DOUBLE_EQ(880, commission(35, 80, 45));
   EXPECT_EXIT(commission(35, 81, 45), ::testing::ExitedWithCode(1), "Value of stocks not in the range");
-
 
   EXPECT_EXIT(commission(35, 40, 0), ::testing::ExitedWithCode(1), "Value of barrels not in the range");
   EXPECT_DOUBLE_EQ(420, commission(35, 40, 1));
