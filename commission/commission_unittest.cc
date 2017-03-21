@@ -43,7 +43,7 @@ TEST(CommissionTest, SpecialBoundary) {
 // S1 = {stocks: 1 ≤ stocks ≤ 80}
 // B1= {barrels: 1 ≤ barrels ≤ 90}
 // Weak Robust
-TEST(CommissionTest, CommissionWR) {
+TEST(CommissionTest, EquivalenceWR) {
   EXPECT_DOUBLE_EQ(100, commission(10, 10, 10));
   EXPECT_EXIT(commission(-1, 40, 45), ::testing::ExitedWithCode(0), "Program terminates");
   EXPECT_EXIT(commission(-2, 40, 45), ::testing::ExitedWithCode(1), "Value of locks not in the range");
@@ -54,7 +54,7 @@ TEST(CommissionTest, CommissionWR) {
   EXPECT_EXIT(commission(35, 40, 91), ::testing::ExitedWithCode(1), "Value of barrels not in the range");
 }
 // Strong Robust
-TEST(CommissionTest, CommissionSR) {
+TEST(CommissionTest, EquivalenceSR) {
   EXPECT_EXIT(commission(-2, 40, 45), ::testing::ExitedWithCode(1), "Value of locks not in the range");
   EXPECT_EXIT(commission(35, -1, 45), ::testing::ExitedWithCode(1), "Value of stocks not in the range");
   EXPECT_EXIT(commission(35, 40, -2), ::testing::ExitedWithCode(1), "Value of barrels not in the range");
@@ -63,3 +63,34 @@ TEST(CommissionTest, CommissionSR) {
   EXPECT_EXIT(commission(35, -1, -1), ::testing::ExitedWithCode(1), "Value of stocks and barrels not in the range");
   EXPECT_EXIT(commission(-2, -1, -1), ::testing::ExitedWithCode(1), "Value of locks and stocks and barrels not in the range");
 }
+
+// Edge Testing
+// Robust
+TEST(CommissionTest, EquivalenceWR) {
+  EXPECT_EXIT(commission(-2, 40, 45), ::testing::ExitedWithCode(1), "Value of locks not in the range");
+  EXPECT_EXIT(commission(-1, 40, 45), ::testing::ExitedWithCode(0), "Program terminates");
+  EXPECT_EXIT(commission(0, 40, 45), ::testing::ExitedWithCode(1), "Value of locks not in the range");
+  EXPECT_DOUBLE_EQ(334, commission(1, 40, 45));
+  EXPECT_DOUBLE_EQ(946, commission(69, 40, 45));
+  EXPECT_DOUBLE_EQ(955, commission(70, 40, 45));
+  EXPECT_EXIT(commission(71, 40, 45), ::testing::ExitedWithCode(1), "Value of locks not in the range");
+
+  EXPECT_EXIT(commission(35, 0, 45), ::testing::ExitedWithCode(1), "Value of stocks not in the range");
+  EXPECT_DOUBLE_EQ(406, commission(35, 1, 45));
+  EXPECT_DOUBLE_EQ(412, commission(35, 2, 45));
+  EXPECT_DOUBLE_EQ(874, commission(35, 79, 45));
+  EXPECT_DOUBLE_EQ(880, commission(35, 80, 45));
+  EXPECT_EXIT(commission(35, 81, 45), ::testing::ExitedWithCode(1), "Value of stocks not in the range");
+
+
+  EXPECT_EXIT(commission(35, 40, 0), ::testing::ExitedWithCode(1), "Value of barrels not in the range");
+  EXPECT_DOUBLE_EQ(420, commission(35, 40, 1));
+  EXPECT_DOUBLE_EQ(425, commission(35, 40, 2));
+  EXPECT_DOUBLE_EQ(860, commission(35, 40, 89));
+  EXPECT_DOUBLE_EQ(865, commission(35, 40, 90));
+  EXPECT_EXIT(commission(35, 40, 91), ::testing::ExitedWithCode(1), "Value of barrels not in the range");
+}
+
+// Decision Table Testing
+// Generate same cases of Equivalence Class Testing
+// No need to test again
