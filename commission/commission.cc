@@ -1,6 +1,52 @@
 #include "commission.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 // Returns commission.
 double commission(int locks, int stocks, int barrels) {
-  return 0;
+  if (locks == -1) {
+    fprintf(stderr, "Program terminates");
+    exit(0);
+  }
+
+  int locks_out_range = (locks < 1 || locks > 70);
+  int stocks_out_range = (stocks < 1 || stocks > 80);
+  int barrels_out_range = (barrels < 1 || barrels > 90);
+
+  if (locks_out_range && !stocks_out_range && !barrels_out_range) {
+    fprintf(stderr, "locks not in range");
+    exit(1);
+  } else if (!locks_out_range && stocks_out_range && !barrels_out_range) {
+    fprintf(stderr, "stocks not in range");
+    exit(1);
+  } else if (!locks_out_range && !stocks_out_range && barrels_out_range) {
+    fprintf(stderr, "barrels not in range");
+    exit(1);
+  } else if (locks_out_range && stocks_out_range && !barrels_out_range) {
+    fprintf(stderr, "locks and stocks not in range");
+    exit(1);
+  } else if (locks_out_range && !stocks_out_range && barrels_out_range) {
+    fprintf(stderr, "locks and barrels not in range");
+    exit(1);
+  } else if (!locks_out_range && stocks_out_range && barrels_out_range) {
+    fprintf(stderr, "stocks and barrels not in range");
+    exit(1);
+  } else if (locks_out_range && stocks_out_range && barrels_out_range) {
+    fprintf(stderr, "locks and stocks and barrels not in range");
+    exit(1);
+  }
+
+  double sales = locks * 45.0 + stocks * 30.0 + barrels * 25.0;
+  double commission;
+  if (sales > 1800.0) {
+    commission = 0.10 * 1000.0;
+    commission = commission + 0.15 * 800.0;
+    commission = commission + 0.2 * (sales - 1800.0);
+  } else if (sales > 1000.0) {
+    commission = 0.10 * 1000.0;
+    commission = commission + 0.15 * (sales - 1000.0);
+  } else
+    commission = 0.10 * sales;
+
+  return commission;
 }
