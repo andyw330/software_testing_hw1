@@ -66,7 +66,7 @@ TEST(CommissionTest, EquivalenceSR) {
 
 // Edge Testing
 // Robust
-TEST(CommissionTest, EquivalenceWR) {
+TEST(CommissionTest, EdgeR) {
   EXPECT_EXIT(commission(-2, 40, 45), ::testing::ExitedWithCode(1), "Value of locks not in the range");
   EXPECT_EXIT(commission(-1, 40, 45), ::testing::ExitedWithCode(0), "Program terminates");
   EXPECT_EXIT(commission(0, 40, 45), ::testing::ExitedWithCode(1), "Value of locks not in the range");
